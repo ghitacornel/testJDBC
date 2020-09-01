@@ -13,7 +13,7 @@ observe :
 - try / catch / finally usage pattern
 - interface vs implementation pattern
 - native SQL usage
-- can use al kind of SQL queries ( DDL / DML / TCl / others )
+- can use all kind of SQL queries ( DDL / DML / TCl / others )
 - programmer is responsible with writing proper SQL native query
 - programmer is responsible mapping of database table row to java objects
 - in case of database structure changes queries can become invalid and the programmer must adjust them manually
