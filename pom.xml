@@ -19,11 +19,20 @@
         <!-- JDBC driver -->
         <!-- JDBC driver = Java Library -->
         <!-- use proper JDBC driver depending on the database type and version -->
+
+        <!-- JDBC drive for MySQL -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.21</version>
         </dependency>
+
+        <!-- JDBC drive for PostgreSQL -->
+<!--        <dependency>-->
+<!--            <groupId>org.postgresql</groupId>-->
+<!--            <artifactId>postgresql</artifactId>-->
+<!--            <version>42.2.12</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 
