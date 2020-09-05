@@ -59,7 +59,12 @@ public class Main4SelectWithPreparedStatement {
                 // get data and process it row by row
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
-                people.add(new Person(id, name));
+
+                // build object
+                Person person = new Person(id, name);
+
+                // and add it to result
+                people.add(person);
 
             }
 
