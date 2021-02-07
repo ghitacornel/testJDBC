@@ -21,10 +21,11 @@ public class Main1Select {
     public static void main(String[] args) {
 
         // ensure database state by executing these queries
-//        create table person(id int primary key, name varchar(20));
-//        insert into person(id,name) values (1,'ion');
-//        insert into person(id,name) values (2,'gheorghe');
-//        select * from person;
+        // drop table person;
+        // create table person(id int primary key, name varchar(20));
+        // insert into person(id,name) values (1,'ion');
+        // insert into person(id,name) values (2,'gheorghe');
+        // select * from person;
 
         // credentials and connectivity configuration
         String machine = "localhost";// machine ip or localhost if the database is locally installed
