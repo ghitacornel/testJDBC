@@ -52,7 +52,7 @@ public class TestTransactional {
             // execute SQL statement and obtain the result
             statement.executeUpdate(sql1);
 
-            // TODO check this line
+            // check this line
             connection.commit(); // add this and the first query is persisted
 
             // try to execute an insert query that will raise a database error
