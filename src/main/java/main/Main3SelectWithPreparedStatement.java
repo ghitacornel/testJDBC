@@ -1,16 +1,26 @@
 package main;
 
+import main.model.Person;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * simple SQL insert
+ * prepared statement usage<br>
+ * SQL injection<br>
+ * query optimisation<br>
  */
-public class Main2Insert {
+public class Main3SelectWithPreparedStatement {
 
     public static void main(String[] args) {
 
         // ensure database state by executing these queries
 //        create table person(id int primary key, name varchar(20));
+//        insert into person(id,name) values (1,'ion');
+//        insert into person(id,name) values (2,'gheorghe');
+//        insert into person(id,name) values (3,'vasile');
+//        select * from person;
 
         // credentials and connectivity configuration
         String machine = "localhost";// machine ip or localhost if the database is locally installed
@@ -21,9 +31,11 @@ public class Main2Insert {
         String password = "sefusefu";
 
         // SQL string to execute
-        String sql1 = "insert into person(id,name) values (1,'ion')";
-        String sql2 = "insert into person(id,name) values (2,'gheorghe')";
-        String sql3 = "insert into person(id,name) values (3,'vasile')";
+        int parameter = 2;// this is a parameter
+        String sql = "SELECT id, name FROM person WHERE id = ?";
+
+        // expected data
+        List<Person> people = new ArrayList<>();
 
         // connection to use
         Connection connection = null;
@@ -34,12 +46,31 @@ public class Main2Insert {
             connection = DriverManager.getConnection(url, username, password);
 
             // create SQL statement
-            Statement statement = connection.createStatement();
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            // set value for each parameter
+            statement.setInt(1, parameter);
 
             // execute SQL statement and obtain the result
-            statement.executeUpdate(sql1);
-            statement.executeUpdate(sql2);
-            statement.executeUpdate(sql3);
+            ResultSet resultSet = statement.executeQuery();
+
+            // loop through the result set
+            while (resultSet.next()) {
+
+                // get data and process it row by row
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+
+                // build object
+                Person person = new Person(id, name);
+
+                // and add it to result
+                people.add(person);
+
+            }
+
+            // optional
+            resultSet.close();
 
             // optional
             statement.close();
@@ -65,9 +96,8 @@ public class Main2Insert {
 
         }
 
-        // verify result by checking database table data
-        // run twice this method and check exception is raised when running the second time if the table row already exists
-
+        // verify result by checking console output
+        System.out.println(people);
     }
 
 }

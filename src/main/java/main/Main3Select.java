@@ -7,19 +7,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * prepared statement usage<br>
- * SQL injection<br>
- * query optimisation<br>
+ * simple SQL SELECT<br>
+ * connection configuration<br>
+ * connection creation<br>
+ * try / catch / finally pattern<br>
+ * interface vs implementation usage<br>
+ * DriverManager => Connection => Statement => ResultSet<br>
+ * always native SQL<br>
+ * no java objects database row automatic mapping
  */
-public class Main4SelectWithPreparedStatement {
+public class Main3Select {
 
     public static void main(String[] args) {
 
         // ensure database state by executing these queries
-//        create table person(id int primary key, name varchar(20));
-//        insert into person(id,name) values (1,'ion');
-//        insert into person(id,name) values (2,'gheorghe');
-//        select * from person;
+        // drop table person;
+        // create table person(id int primary key, name varchar(20));
+        // insert into person(id,name) values (1,'ion');
+        // insert into person(id,name) values (2,'gheorghe');
+        // insert into person(id,name) values (3,'vasile');
+        // select * from person;
 
         // credentials and connectivity configuration
         String machine = "localhost";// machine ip or localhost if the database is locally installed
@@ -30,8 +37,7 @@ public class Main4SelectWithPreparedStatement {
         String password = "sefusefu";
 
         // SQL string to execute
-        int parameter = 2;// this is a parameter
-        String sql = "SELECT id, name FROM person WHERE id = ?";
+        String sql = "SELECT id, name FROM person";
 
         // expected data
         List<Person> people = new ArrayList<>();
@@ -45,13 +51,10 @@ public class Main4SelectWithPreparedStatement {
             connection = DriverManager.getConnection(url, username, password);
 
             // create SQL statement
-            PreparedStatement statement = connection.prepareStatement(sql);
-
-            // set value for each parameter
-            statement.setInt(1, parameter);
+            Statement statement = connection.createStatement();
 
             // execute SQL statement and obtain the result
-            ResultSet resultSet = statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery(sql);
 
             // loop through the result set
             while (resultSet.next()) {
@@ -95,7 +98,7 @@ public class Main4SelectWithPreparedStatement {
 
         }
 
-        // verify result by checking console output
+        // verify result by checking database table data and console output
         System.out.println(people);
     }
 

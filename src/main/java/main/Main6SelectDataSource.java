@@ -21,6 +21,7 @@ public class Main6SelectDataSource {
 //        create table person(id int primary key, name varchar(20));
 //        insert into person(id,name) values (1,'ion');
 //        insert into person(id,name) values (2,'gheorghe');
+//        insert into person(id,name) values (3,'vasile');
 //        select * from person;
 
         // credentials and connectivity configuration

@@ -3,14 +3,11 @@ package main;
 import java.sql.*;
 
 /**
- * simple SQL insert
+ * simple SQL DDL example
  */
-public class Main2Insert {
+public class Main1Create {
 
     public static void main(String[] args) {
-
-        // ensure database state by executing these queries
-//        create table person(id int primary key, name varchar(20));
 
         // credentials and connectivity configuration
         String machine = "localhost";// machine ip or localhost if the database is locally installed
@@ -21,9 +18,7 @@ public class Main2Insert {
         String password = "sefusefu";
 
         // SQL string to execute
-        String sql1 = "insert into person(id,name) values (1,'ion')";
-        String sql2 = "insert into person(id,name) values (2,'gheorghe')";
-        String sql3 = "insert into person(id,name) values (3,'vasile')";
+        String sql = "create table person(id int primary key, name varchar(20))";
 
         // connection to use
         Connection connection = null;
@@ -37,9 +32,7 @@ public class Main2Insert {
             Statement statement = connection.createStatement();
 
             // execute SQL statement and obtain the result
-            statement.executeUpdate(sql1);
-            statement.executeUpdate(sql2);
-            statement.executeUpdate(sql3);
+            statement.execute(sql);
 
             // optional
             statement.close();
@@ -65,8 +58,8 @@ public class Main2Insert {
 
         }
 
-        // verify result by checking database table data
-        // run twice this method and check exception is raised when running the second time if the table row already exists
+        // verify result by checking database tables
+        // run twice this method and check exception is raised when running the second time if the table already exists
 
     }
 
