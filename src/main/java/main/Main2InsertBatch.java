@@ -8,7 +8,7 @@ import java.sql.Statement;
 /**
  * queries in batches
  */
-public class Main5InsertBatch {
+public class Main2InsertBatch {
 
     public static void main(String[] args) {
 

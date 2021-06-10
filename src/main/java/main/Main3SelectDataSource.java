@@ -13,7 +13,7 @@ import java.util.List;
  * DataSource is an interface with multiple possible implementations
  * DataSource can use DriverManager under the hood
  */
-public class Main6SelectDataSource {
+public class Main3SelectDataSource {
 
     public static void main(String[] args) {
 
