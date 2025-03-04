@@ -1,9 +1,9 @@
 package transactional;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.sql.*;
 
@@ -21,7 +21,7 @@ public class TestTransactional {
         return DriverManager.getConnection(url, username, password);
     }
 
-    @Before
+    @BeforeEach
     public void setUp() throws SQLException {
         connection = createConnection();
         connection.createStatement().execute("drop table if exists person_transactional");
@@ -29,13 +29,13 @@ public class TestTransactional {
         connection.createStatement().execute("insert into person_transactional(id,name) values (1,'existing')");
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws SQLException {
         connection.createStatement().execute("drop table if exists person_transactional");
         connection.close();
     }
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testTransactionalPartialRollback() throws SQLException {
 
         String sql1 = "insert into person_transactional(id,name) values (2,'new value')";
@@ -71,15 +71,16 @@ public class TestTransactional {
                 System.out.println(resultSet.getInt(1) + " " + resultSet.getString(2));
             }
 
-            throw e;
+            Assertions.assertEquals("Data truncation: Data too long for column 'name' at row 1", e.getMessage());
+            return;
 
         }
 
-        Assert.fail("expect exception");
+        Assertions.fail("expect exception");
     }
 
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testTransactionalFullRollback() throws SQLException {
 
         String sql1 = "insert into person_transactional(id,name) values (2,'new value')";
@@ -112,10 +113,11 @@ public class TestTransactional {
                 System.out.println(resultSet.getInt(1) + " " + resultSet.getString(2));
             }
 
-            throw e;
+            Assertions.assertEquals("Data truncation: Data too long for column 'name' at row 1", e.getMessage());
+            return;
 
         }
 
-        Assert.fail("expect exception");
+        Assertions.fail("expect exception");
     }
 }
